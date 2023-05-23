@@ -443,6 +443,20 @@ SELECT DISTINCT
 				,'Lock Waits/sec'
 				,'Latch Waits/sec'
 			)
+		) OR (
+		    spi.[object_name] LIKE '%XTP%'
+		    AND spi.[counter_name] IN (
+		        'Transactions created/sec'
+		       ,'Transactions aborted/sec'
+		       ,'Read-only transactions prepared/sec'
+		       ,'Transactions aborted by user/sec'
+		       ,'Cascading aborts/sec'
+		       ,'Commit dependencies taken/sec'
+		       ,'Save point refreshes/sec'
+		       ,'Save point rollbacks/sec'
+		       ,'Save points created/sec'
+		       ,'Transaction validation failure/sec'
+		    )
 		)
 )
 

@@ -356,7 +356,15 @@ WITH PerfCounters AS (
 				,'Lock Waits/sec'
 				,'Latch Waits/sec'
 			)
-		)
+		) OR (
+            spi.[object_name] LIKE '%XTP%'
+            AND spi.[counter_name] IN (
+                'Transactions created/sec'
+               ,'Transactions aborted/sec'
+               ,'Read-only transactions prepared/sec'
+               ,'Transactions aborted by user/sec'
+            )
+        )
 )
 
 INSERT INTO @PCounters select * from PerfCounters
